@@ -1,7 +1,9 @@
 import { AddToCartIcon } from './icons';
 import PropTypes from 'prop-types';
 
-export default function Product ({ title, description, thumbnail, price }) {
+export default function Product (
+  { title, category, description, thumbnail, price }
+) {
   return (
     <section className='product'>
       <header>
@@ -10,6 +12,7 @@ export default function Product ({ title, description, thumbnail, price }) {
 
       <main>
         <h3>{title} - ${price}</h3>
+        <p>{category}</p>
         <p>{description}</p>
       </main>
 
@@ -24,6 +27,7 @@ export default function Product ({ title, description, thumbnail, price }) {
 
 Product.propTypes = {
   title: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired

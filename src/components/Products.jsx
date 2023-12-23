@@ -9,6 +9,7 @@ export default function Products ({ products }) {
           <li key={products.id}>
             <Product
               title={products.title}
+              category={products.category}
               description={products.description}
               price={products.price}
               thumbnail={products.thumbnail}
