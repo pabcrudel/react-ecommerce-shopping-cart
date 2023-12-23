@@ -1,0 +1,5 @@
+.filters form {
+  /* Centers the filters with space around each one */
+  display: flex;
+  justify-content: space-around;
+}
