@@ -1,0 +1,40 @@
+:root {
+  /* Font management */
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+  font-size: 20px;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+
+  /* Box sizes will include border and paddings */
+  box-sizing: border-box;
+
+  /* Center content to improve legibility */
+  max-width: 75ch;
+  margin: auto;
+}
+
+/* Inherit box sizing to allow rollbacks on any specific section */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  /* Increase padding of each side */
+  padding: 0 15px;
+}
+
+#root {
+  /* React App height will be at least the viewer height */
+  min-height: 100vh;
+
+  /* Elements inside the React App fill appear in columns */
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  /* Even if it is the smallest, it will have most space than it's siblings */
+  flex-grow: 1;
+}
