@@ -3,21 +3,25 @@ import Product from './Product';
 
 export default function Products ({ products }) {
   return (
-    <ul className='products'>
-      {
-        products.map(products => (
-          <li key={products.id}>
-            <Product
-              title={products.title}
-              category={products.category}
-              description={products.description}
-              price={products.price}
-              thumbnail={products.thumbnail}
-            />
-          </li>
-        ))
-      }
-    </ul>
+    <section className='products'>
+      <h2>Products</h2>
+
+      <ul>
+        {
+          products.map(products => (
+            <li key={products.id}>
+              <Product
+                title={products.title}
+                category={products.category}
+                description={products.description}
+                price={products.price}
+                thumbnail={products.thumbnail}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   );
 }
 

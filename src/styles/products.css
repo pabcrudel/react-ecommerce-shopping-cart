@@ -2,11 +2,13 @@
   /* Common styles */
   --img-size: 275px;
   --border-radius: 8px;
+}
 
+.products ul {
   /* Reset list default style */
   list-style-type: none;
   padding: 0;
-
+  
   /* Creates a responsive Grid layout */
   display: grid;
     /* Fit automatically the number of columns depending on the container size:
