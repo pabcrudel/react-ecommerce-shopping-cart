@@ -1,0 +1,59 @@
+.products {
+  /* Common styles */
+  --img-size: 275px;
+  --border-radius: 8px;
+
+  /* Reset list default style */
+  list-style-type: none;
+  padding: 0;
+
+  /* Creates a responsive Grid layout */
+  display: grid;
+    /* Fit automatically the number of columns depending on the container size:
+     * - Each column will be between 200px and the whole space
+    */
+  grid-template-columns: repeat(auto-fill, minmax(var(--img-size), 1fr));
+  gap: 1em;
+}
+
+/* Add a border to improve each product visibility */
+.product {
+  padding: 0.7em;
+  border: 2px solid;
+  border-radius: var(--border-radius);
+}
+
+/* Each product will have the same size and alignment even if it's content is
+smaller than it's siblings */
+.products .product {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.products .product main {
+  flex-grow: 1;
+}
+
+.products img {
+  /* Set a maximum size. If the image is bigger, it will fit the container
+   * without changing it's aspect ratio
+  */
+  width: 100%;
+  height: var(--img-size);
+  object-fit: cover;
+
+  /* Each corner will be rounded */
+  border-radius: var(--border-radius);
+}
+
+/* Center footer content */
+.products footer {
+  text-align: center;
+}
+
+/* Reduce side gap of the Water.css button padding */
+.products button {
+  --side-gap: 20px;
+  padding-left: var(--side-gap);
+  padding-right: var(--side-gap);
+}
