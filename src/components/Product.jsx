@@ -5,7 +5,7 @@ export default function Product ({ title, description, thumbnail, price }) {
   return (
     <section className='product'>
       <header>
-        <img src={thumbnail} alt={title} />
+        <img src={thumbnail} alt={title} crossOrigin='anonymous'/>
       </header>
 
       <main>
