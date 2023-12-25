@@ -48,6 +48,7 @@ export default function FiltersForm (
             id={minPriceFilterId}
             min='0'
             max='1000'
+            value={initialPrice}
             onChange={handlePriceChanges}
           />
         </div>
