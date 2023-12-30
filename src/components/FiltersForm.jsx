@@ -1,11 +1,9 @@
-import { useId, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useId } from 'react';
+import { useFilters } from '../hooks/useFilters';
 
-export default function FiltersForm (
-  { initialPrice, initialCategory, updateFilters }
-) {
-  const [category, setCategory] = useState(initialCategory);
-  const [minPrice, setMinPrice] = useState(initialPrice);
+export default function FiltersForm () {
+  const { setCategory, minPrice, setMinPrice } = useFilters();
+
   const categoryFilterId = useId();
   const minPriceFilterId = useId();
 
@@ -13,14 +11,12 @@ export default function FiltersForm (
     const minPrice = Number.parseInt(event.target.value);
 
     setMinPrice(minPrice);
-    updateFilters(category, minPrice);
   };
 
   const handleCategoryChanges = event => {
     const category = event.target.value;
 
     setCategory(category);
-    updateFilters(category, minPrice);
   };
 
   return (
@@ -41,14 +37,16 @@ export default function FiltersForm (
         </div>
 
         <div className="price">
-          <label htmlFor={minPriceFilterId}>Minimum price: ${minPrice}</label>
+          <label htmlFor={minPriceFilterId}>
+            Minimum price: ${minPrice}
+          </label>
           <input
             type="range"
             name="filterPrice"
             id={minPriceFilterId}
             min='0'
             max='1000'
-            value={initialPrice}
+            value={minPrice}
             onChange={handlePriceChanges}
           />
         </div>
@@ -56,9 +54,3 @@ export default function FiltersForm (
     </section>
   );
 }
-
-FiltersForm.propTypes = {
-  initialCategory: PropTypes.string.isRequired,
-  initialPrice: PropTypes.number.isRequired,
-  updateFilters: PropTypes.func.isRequired
-};

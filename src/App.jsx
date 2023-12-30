@@ -2,26 +2,14 @@ import { products as mockProducts } from './mocks/products.json';
 import { useState } from 'react';
 import Products from './components/Products';
 import FiltersForm from './components/FiltersForm';
-
-const INITIAL_FILTER = {
-  category: 'all',
-  minPrice: 0
-};
+import { useFilters } from './hooks/useFilters';
 
 export default function App () {
   const [products] = useState(mockProducts);
 
-  const [filers, setFilters] = useState(INITIAL_FILTER);
+  const { filterProducts } = useFilters();
 
-  const filteredProducts = products.filter(product => (
-    product.price >= filers.minPrice && (
-      filers.category === 'all' || product.category === filers.category
-    )
-  ));
-
-  function updateFilters (category, minPrice) {
-    setFilters({ category, minPrice });
-  }
+  const filteredProducts = filterProducts(products);
 
   return (
     <>
@@ -30,11 +18,7 @@ export default function App () {
       </header>
 
       <main>
-        <FiltersForm
-          initialCategory={filers.category}
-          initialPrice={filers.minPrice}
-          updateFilters={updateFilters}
-        />
+        <FiltersForm />
         <Products products={filteredProducts}/>
       </main>
     </>
