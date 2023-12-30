@@ -4,7 +4,7 @@ import { useFilters } from '../hooks/useFilters';
 export default function FiltersForm () {
   return (
     <section className="filters">
-      <h2 className='.centeredTitle'>Apply a filter</h2>
+      <h2>Apply a filter</h2>
 
       <form className='center'>
         <CategorySection/>
