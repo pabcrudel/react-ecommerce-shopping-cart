@@ -2,16 +2,22 @@ import { useId } from 'react';
 import { useFilters } from '../hooks/useFilters';
 
 export default function FiltersForm () {
-  const { setCategory, minPrice, setMinPrice } = useFilters();
+  return (
+    <section className="filters">
+      <h2 className='.centeredTitle'>Apply a filter</h2>
+
+      <form className='center'>
+        <CategorySection/>
+        <PriceSection/>
+      </form>
+    </section>
+  );
+}
+
+function CategorySection () {
+  const { setCategory } = useFilters();
 
   const categoryFilterId = useId();
-  const minPriceFilterId = useId();
-
-  const handlePriceChanges = event => {
-    const minPrice = Number.parseInt(event.target.value);
-
-    setMinPrice(minPrice);
-  };
 
   const handleCategoryChanges = event => {
     const category = event.target.value;
@@ -20,37 +26,45 @@ export default function FiltersForm () {
   };
 
   return (
-    <section className="filters">
-      <h2 className='.centeredTitle'>Apply a filter</h2>
+    <section className="category">
+      <label htmlFor={categoryFilterId}>Category</label>
+      <select
+        name="filterCategory"
+        id={categoryFilterId}
+        onChange={handleCategoryChanges}
+      >
+        <option value="all">All</option>
+        <option value="laptops">Laptops</option>
+      </select>
+    </section>
+  );
+}
 
-      <form className='center'>
-        <div className="category">
-          <label htmlFor={categoryFilterId}>Category</label>
-          <select
-            name="filterCategory"
-            id={categoryFilterId}
-            onChange={handleCategoryChanges}
-          >
-            <option value="all">All</option>
-            <option value="laptops">Laptops</option>
-          </select>
-        </div>
+function PriceSection () {
+  const { minPrice, setMinPrice } = useFilters();
 
-        <div className="price">
-          <label htmlFor={minPriceFilterId}>
-            Minimum price: ${minPrice}
-          </label>
-          <input
-            type="range"
-            name="filterPrice"
-            id={minPriceFilterId}
-            min='0'
-            max='1000'
-            value={minPrice}
-            onChange={handlePriceChanges}
-          />
-        </div>
-      </form>
+  const minPriceFilterId = useId();
+
+  const handlePriceChanges = event => {
+    const minPrice = Number.parseInt(event.target.value);
+
+    setMinPrice(minPrice);
+  };
+
+  return (
+    <section className="price">
+      <label htmlFor={minPriceFilterId}>
+        Minimum price: ${minPrice}
+      </label>
+      <input
+        type="range"
+        name="filterPrice"
+        id={minPriceFilterId}
+        min='0'
+        max='1000'
+        value={minPrice}
+        onChange={handlePriceChanges}
+      />
     </section>
   );
 }
