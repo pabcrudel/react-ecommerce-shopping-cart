@@ -12,5 +12,5 @@ export function useFilters () {
     )
   ));
 
-  return { setCategory, minPrice, setMinPrice, filterProducts };
+  return { category, setCategory, minPrice, setMinPrice, filterProducts };
 }
