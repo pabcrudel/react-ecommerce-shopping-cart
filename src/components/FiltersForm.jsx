@@ -1,20 +1,21 @@
-import { useId } from 'react';
+import { useEffect, useId } from 'react';
 import { useFilters } from '../hooks/useFilters';
+import PropTypes from 'prop-types';
 
-export default function FiltersForm () {
+export default function FiltersForm ({ categories, maxPrice }) {
   return (
     <section className="filters">
       <h2>Apply a filter</h2>
 
       <form className='center'>
-        <CategorySection/>
-        <PriceSection/>
+        <CategorySection categories={categories}/>
+        <PriceSection maxPrice={maxPrice}/>
       </form>
     </section>
   );
 }
 
-function CategorySection () {
+function CategorySection ({ categories }) {
   const { setCategory } = useFilters();
 
   const categoryFilterId = useId();
@@ -34,14 +35,22 @@ function CategorySection () {
         onChange={handleCategoryChanges}
       >
         <option value="all">All</option>
-        <option value="laptops">Laptops</option>
+        {
+          categories.map((category, index) => (
+            <option key={index} value={category}>{category}</option>
+          ))
+        }
       </select>
     </section>
   );
 }
 
-function PriceSection () {
+function PriceSection ({ maxPrice }) {
   const { minPrice, setMinPrice } = useFilters();
+
+  // Ensure that minPrice is equal or lower than maxPrice when this component is
+  // rendered.
+  useEffect(() => { if (minPrice > maxPrice) setMinPrice(maxPrice); });
 
   const minPriceFilterId = useId();
 
@@ -61,10 +70,19 @@ function PriceSection () {
         name="filterPrice"
         id={minPriceFilterId}
         min='0'
-        max='1000'
+        max={maxPrice}
         value={minPrice}
         onChange={handlePriceChanges}
       />
     </section>
   );
 }
+
+const categoryProps = {
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired
+};
+const priceProps = { maxPrice: PropTypes.number.isRequired };
+
+FiltersForm.propTypes = { ...categoryProps, ...priceProps };
+CategorySection.propTypes = categoryProps;
+PriceSection.propTypes = priceProps;
