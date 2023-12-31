@@ -2,9 +2,15 @@ import { useContext } from 'react';
 import { FiltersContext } from '../contexts/filters';
 
 export function useFilters () {
+  const filtersContext = useContext(FiltersContext);
+
+  if (!filtersContext) {
+    throw new Error('"useFilters" must be used within a "FiltersContext"');
+  }
+
   const {
     category, setCategory, minPrice, setMinPrice
-  } = useContext(FiltersContext);
+  } = filtersContext;
 
   const filterProducts = products => products.filter(product => (
     product.price >= minPrice && (
