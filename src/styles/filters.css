@@ -2,4 +2,7 @@
   /* Centers the filters with space around each one */
   display: flex;
   justify-content: space-around;
+
+  /* Wrap items if they doesn't fit the available space */
+  flex-wrap: wrap;
 }
