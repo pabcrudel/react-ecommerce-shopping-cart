@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Product from './Product';
+import { AddToCartIcon } from './icons';
 
 export default function Products ({ products }) {
   return (
@@ -8,15 +8,9 @@ export default function Products ({ products }) {
 
       <ul>
         {
-          products.map(products => (
-            <li key={products.id}>
-              <Product
-                title={products.title}
-                category={products.category}
-                description={products.description}
-                price={products.price}
-                thumbnail={products.thumbnail}
-              />
+          products.map(product => (
+            <li key={product.id}>
+              <Product product={product}/>
             </li>
           ))
         }
@@ -25,6 +19,45 @@ export default function Products ({ products }) {
   );
 }
 
+function Product ({ product }) {
+  const { title, category, description, thumbnail, price } = product;
+
+  return (
+    <section className='product'>
+      <header>
+        <img src={thumbnail} alt={title} crossOrigin='anonymous'/>
+      </header>
+
+      <main>
+        <h3>{title} - ${price}</h3>
+        <p>{category}</p>
+        <p>{description}</p>
+      </main>
+
+      <footer>
+        <button>
+          <AddToCartIcon />
+        </button>
+      </footer>
+    </section>
+  );
+}
+
+const productTypes = PropTypes.shape(
+  {
+    title: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired
+  }
+).isRequired;
+
 Products.propTypes = {
-  products: PropTypes.array.isRequired
+  products: PropTypes.arrayOf(productTypes).isRequired
+};
+
+Product.propTypes = {
+  product: productTypes
 };
