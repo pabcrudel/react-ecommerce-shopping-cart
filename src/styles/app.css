@@ -38,3 +38,11 @@ main {
   /* Even if it is the smallest, it will have most space than it's siblings */
   flex-grow: 1;
 }
+
+footer #copyright {
+  /* Center text horizontally */
+  text-align: center;
+
+  /* Increase margin top depending on the font size of the copyright section */
+  margin-top: 2em;
+}

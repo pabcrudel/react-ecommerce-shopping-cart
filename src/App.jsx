@@ -4,6 +4,7 @@ import Cart from './components/Cart';
 import { useFilters } from './hooks/useFilters';
 import { useProducts } from './hooks/useProducts';
 import { CartProvider } from './contexts/cartContext';
+import Footer from './components/Footer';
 
 export default function App () {
   const { products, categories, maxPrices } = useProducts();
@@ -28,6 +29,8 @@ export default function App () {
           <Cart/>
         </aside>
       </CartProvider>
+
+      <Footer repositoryName='react-ecommerce-shopping-cart'/>
     </>
   );
 }
