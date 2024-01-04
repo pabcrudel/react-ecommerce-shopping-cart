@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { AddToCartIcon } from './icons';
+import { useCart } from '../hooks/useCart';
 
 export default function Products ({ products }) {
   return (
@@ -22,6 +23,8 @@ export default function Products ({ products }) {
 function Product ({ product }) {
   const { title, category, description, thumbnail, price } = product;
 
+  const { addToCart } = useCart();
+
   return (
     <section className='product'>
       <header>
@@ -35,7 +38,7 @@ function Product ({ product }) {
       </main>
 
       <footer>
-        <button>
+        <button onClick={() => addToCart(product)}>
           <AddToCartIcon />
         </button>
       </footer>

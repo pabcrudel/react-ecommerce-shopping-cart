@@ -1,0 +1,62 @@
+.cart {
+  /* All cart content will be above the main content */
+  z-index: 1;
+}
+
+.cart > header{
+  /* Cart button will be fixed on scroll */
+  position: fixed;
+  --side-gap: 10px;
+  top: var(--side-gap);
+  right: var(--side-gap);
+
+  /* It will be placed above the cart content */
+  z-index: 1;
+}
+
+/* Cart button will be a circle */
+.cart header button {
+  border-radius: 50%;
+  padding: 10px 10px 5px;
+}
+
+/* Cart content will be hidden until the user pressed the button */
+.cart .hide, .cart input {
+  display: none;
+}
+.cart .show {
+  display: block;
+}
+
+.cart > main {
+  padding: 15px;
+
+  /* Cart content will be fixed on scroll but have itś own scroll bar */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+
+  /* Have the same bg-color as the body by using Water.css variables */
+  background-color: var(--background-body);
+
+  /* As the border color is not specify,
+   * it will be the same as the font color
+  */
+  border: 1px solid;
+
+  /* It's width will change on smaller devices */
+  width: 350px;
+}
+
+.cart footer {
+  /* Center delete cart button */
+  text-align: center;
+}
+
+@media screen and (max-width: 400px) {
+  .cart > main {
+    width: 100%;
+  }
+}
