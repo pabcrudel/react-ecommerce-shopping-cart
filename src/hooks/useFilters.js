@@ -5,7 +5,7 @@ export function useFilters () {
   const filtersContext = useContext(FiltersContext);
 
   if (!filtersContext) {
-    throw new Error('"useFilters" must be used within a "FiltersContext"');
+    throw new Error('"useFilters" must be used within a "FiltersProvider"');
   }
 
   const {
