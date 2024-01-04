@@ -33,13 +33,18 @@ export default function useCartReducer () {
 
   useEffect(() => setWithTTL(STORAGE_KEY, cart), [cart]);
 
+  function isProductInCart (id) {
+    return cart.some(product => product.id === id);
+  }
+
   return {
     cart,
     addToCart,
     increaseQuantity,
     decreaseQuantity,
     removeFromCart,
-    clearCart
+    clearCart,
+    isProductInCart
   };
 }
 

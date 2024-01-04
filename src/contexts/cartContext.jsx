@@ -13,7 +13,8 @@ export function CartProvider ({ children }) {
     increaseQuantity,
     decreaseQuantity,
     removeFromCart,
-    clearCart
+    clearCart,
+    isProductInCart
   } = useCartReducer();
 
   return (
@@ -24,7 +25,8 @@ export function CartProvider ({ children }) {
           increaseQuantity,
           decreaseQuantity,
           removeFromCart,
-          clearCart
+          clearCart,
+          isProductInCart
         }
       }
     >

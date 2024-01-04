@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { AddToCartIcon } from './icons';
+import { AddToCartIcon, CheckCircleIcon } from './icons';
 import { useCart } from '../hooks/useCart';
 
 export default function Products ({ products }) {
@@ -21,9 +21,11 @@ export default function Products ({ products }) {
 }
 
 function Product ({ product }) {
-  const { title, category, description, thumbnail, price } = product;
+  const { title, category, description, thumbnail, price, id } = product;
 
-  const { addToCart } = useCart();
+  const { addToCart, isProductInCart } = useCart();
+
+  const isInCart = isProductInCart(id);
 
   return (
     <section className='product'>
@@ -38,8 +40,10 @@ function Product ({ product }) {
       </main>
 
       <footer>
-        <button onClick={() => addToCart(product)}>
-          <AddToCartIcon />
+        <button onClick={() => addToCart(product)} disabled={isInCart}>
+          {
+            isInCart ? <CheckCircleIcon /> : <AddToCartIcon />
+          }
         </button>
       </footer>
     </section>
