@@ -34,7 +34,7 @@ export default function Cart () {
           </ul>
         </section>
         <footer>
-          <button onClick={clearCart}>
+          <button onClick={clearCart} disabled={!cart.length}>
             <ClearCartIcon/>
           </button>
         </footer>
