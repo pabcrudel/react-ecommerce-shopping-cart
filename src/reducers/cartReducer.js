@@ -1,7 +1,13 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
+import { getWithTTL, setWithTTL } from '../utils/storage-manager';
+
+const STORAGE_KEY = 'react-ecommerce-shopping-cart';
 
 export default function useCartReducer () {
-  const [cart, dispatch] = useReducer(cartReducer, CART_INITIAL_STATE);
+  const [cart, dispatch] = useReducer(
+    cartReducer,
+    getWithTTL(STORAGE_KEY) || CART_INITIAL_STATE
+  );
 
   const addToCart = product => dispatch({
     type: CART_ACTIONS.ADD,
@@ -24,6 +30,8 @@ export default function useCartReducer () {
   });
 
   const clearCart = () => dispatch({ type: CART_ACTIONS.CLEAR });
+
+  useEffect(() => setWithTTL(STORAGE_KEY, cart), [cart]);
 
   return {
     cart,
